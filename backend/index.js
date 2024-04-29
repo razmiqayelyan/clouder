@@ -9,7 +9,9 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
-app.use('/static', express.static(path.join(__dirname, 'images')));
+
+// Serve static files from the 'images' directory
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 const upload = multer({
     limits: {
@@ -32,6 +34,13 @@ app.post('/image', upload.single('upload'), async (req, res) => {
         console.error(error);
         res.status(400).send(error.message);
     }
+});
+
+// Route to get a list of all uploaded images
+app.get('/images', (req, res) => {
+    // Serve a JSON response with a list of image file names
+    const imageFiles = fs.readdirSync(path.join(__dirname, 'images'));
+    res.json({ images: imageFiles });
 });
 
 app.listen(port, () => {

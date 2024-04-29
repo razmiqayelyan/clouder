@@ -21,7 +21,7 @@
             formData.append("upload", document.getElementById("uploadInput").files[0]);
 
             try {
-                const response = await fetch('http://localhost:3000/image', {
+                const response = await fetch('http://YOUR_EC2_INSTANCE_PUBLIC_IP:3000/image', {
                     method: "POST",
                     body: formData
                 });
