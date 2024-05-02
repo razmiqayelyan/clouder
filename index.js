@@ -40,7 +40,7 @@ app.post('/image', upload.single('upload'), async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
+app.get("/", (req, res) => res.send("Welcome to AWS"))
 // Route to get a list of all uploaded images
 app.get('/images', (req, res) => {
     try {
